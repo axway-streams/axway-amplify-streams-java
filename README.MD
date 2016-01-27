@@ -4,20 +4,22 @@
 
 1. Create an free account on streamdata.io https://portal.streamdata.io/#/register to get an App token.
 
-2. Edit Main.java and replace ```[YOUR TOKEN HERE]``` with your App token.
+2. Clone project, edit Main.java and replace ```[YOUR TOKEN HERE]``` with your App token.
 
 3. Make sure you have Java 8+ installed
 
 4. Make sure you have maven 3.0+ installed
 
+5. Build project with maven:
+
   ```
   mvn clean install
   ```
 
-5. Launch main in a terminal:
+6. Run sample from a terminal:
 
   ```
-  
+  java -jar target/streamdataio-java-0.0.1-SNAPSHOT.jar
   ```  
 
 You should see data and patches pushed in your application and displayed on your terminal.

@@ -68,7 +68,9 @@ public class SampleEventSource extends Thread {
 
     public void close(){
         LOGGER.debug("Closing EventSource ...");
-        eventSource.close();
+        if (eventSource != null) {
+            eventSource.close();
+        }
         LOGGER.debug("EventSource closed.");
     }
 

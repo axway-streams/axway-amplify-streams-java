@@ -120,6 +120,7 @@ public class SampleEventSource implements Runnable {
             };
         } catch (Exception e) {
             LOGGER.error("An Error occured.", e);
+            System.exit(0);
         }
 
     }

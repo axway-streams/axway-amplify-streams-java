@@ -35,12 +35,12 @@ import java.io.IOException;
  * It uses zjsonpatch (https://github.com/flipkart-incubator/zjsonpatch) as a Java Json-Patch implementation.
  * zjsonpatch relies itself on jackson Java Json library (http://wiki.fasterxml.com/JacksonHome).
  */
-public class SampleEventSource implements Runnable {
+public class SampleEventSource extends Thread {
     // define a slf4j logger
     private static final Logger LOGGER = LoggerFactory.getLogger(SampleEventSource.class);
 
     // The API URL string
-    private final String url;
+    private String url;
 
     // jackson objectMapper to parse Json content
     private final ObjectMapper jsonObjectMapper = new ObjectMapper();
@@ -48,23 +48,38 @@ public class SampleEventSource implements Runnable {
     // local storage of the data
     private JsonNode data;
 
+    // create a client using jersey Server-Sent event library
+    private final  Client client = ClientBuilder.newBuilder().register(SseFeature.class).build();
+
+    // create the webTarget for the client (URL to stream)
+    private WebTarget target;
+
+    private EventSource eventSource;
+
     /**
      * SampleEventSource constructor.
      * @param aUrl the API URL
      */
     SampleEventSource(String aUrl){
         url = aUrl;
+        target = client.target(url);
+    }
+
+    private SampleEventSource() {
+
+    }
+
+    public void close(){
+        LOGGER.debug("Closing EventSource ...");
+        eventSource.close();
+        LOGGER.debug("EventSource closed.");
     }
 
     @Override
     public void run() {
 
         try {
-            // create a client using jersey Server-Sent event library
-            Client client = ClientBuilder.newBuilder().register(SseFeature.class).build();
 
-            // create the webTarget for the client (URL to stream)
-            WebTarget target = client.target(url);
 
             // build EventSource object to handle Streamdata.io Server-Sent events for this target
             // Streamdata.io will send two types of events :
@@ -72,7 +87,8 @@ public class SampleEventSource implements Runnable {
             // when a fresh Json data set is pushed by Streamdata.io coming from the API.
             // 'patch' event : this is a patch event to apply to initial data set. The streamdata.io specific 'patch' event will be triggered when a fresh Json patch
             // is pushed by streamdata.io coming from the API. This patch has to be applied to the latest data set.
-            new EventSource(target) {
+            LOGGER.debug("Starting EventSource ...");
+            eventSource = new EventSource(target) {
                 @Override
                 public void onEvent(InboundEvent inboundEvent) {
                     // get event name
@@ -120,6 +136,7 @@ public class SampleEventSource implements Runnable {
             };
         } catch (Exception e) {
             LOGGER.error("An Error occured.", e);
+            close();
             System.exit(0);
         }
 

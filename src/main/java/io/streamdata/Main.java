@@ -19,16 +19,20 @@ public class Main {
 
         String url = buildStreamdataUrl(apiUrl, token);
 
-        // Start the event source in a Thread.
-        Thread t = new Thread(new SampleEventSource(url));
-        t.setDaemon(true);
-        t.start();
+        // Start the event source as a Thread.
+        SampleEventSource eventSource = new SampleEventSource(url);
+        eventSource.setDaemon(true);
+        eventSource.start();
 
         // let the sample app run for a few seconds.
         Thread.sleep(30000);
 
+        // Close the eventSource
+        eventSource.close();
+
         // then exit.
         System.exit(0);
+
     }
 
 

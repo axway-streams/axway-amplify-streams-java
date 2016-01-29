@@ -1,7 +1,12 @@
 package io.streamdata;
 
+import com.google.common.base.Preconditions;
+import jersey.repackaged.com.google.common.collect.Maps;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     /**
@@ -17,7 +22,16 @@ public class Main {
 
         String token = "[YOUR TOKEN HERE]";
 
-        String url = buildStreamdataUrl(apiUrl, token);
+        // specific header map associated with the request
+        Map<String,String> headers = Maps.newHashMap();
+
+        // add this header if you wish to stream Json rather than Json-patch
+        // NOTE: no 'patch' event will be emitted.
+
+        // headers.put("Accept", "application/json");
+
+        String url = buildStreamdataUrl(apiUrl, token, headers);
+
 
         // Start the event source as a Thread.
         SampleEventSource eventSource = new SampleEventSource(url);
@@ -36,10 +50,20 @@ public class Main {
     }
 
 
-    private static String buildStreamdataUrl(String anApiUrl,String aToken) throws URISyntaxException {
+    private static String buildStreamdataUrl(String anApiUrl,String aToken,Map<String,String> aHeaders) throws URISyntaxException {
+        Preconditions.checkNotNull(anApiUrl,"anApiUrl cannot be null");
+        Preconditions.checkNotNull(aToken,"aToken cannot be null");
+        Preconditions.checkNotNull(aHeaders,"aHeaders cannot be null");
         URI uri = new URI(anApiUrl);
         String aqueryParamSeparator = (uri.getQuery() == null || uri.getQuery().isEmpty() )?"?":"&";
-        return String.format("https://streamdata.motwin.net/%s%sX-Sd-Token=%s", anApiUrl,aqueryParamSeparator, aToken);
+
+        // proxify and add auth token to API url
+        String url = String.format("https://streamdata.motwin.net/%s%sX-Sd-Token=%s", anApiUrl,aqueryParamSeparator, aToken);
+
+        // add headers if any to API url
+        String additionalHeaders = aHeaders.keySet().stream().map(key -> "X-Sd-Header" + "=" +  key + ":" + aHeaders.get(key)).collect(Collectors.joining("&"));
+
+        return url + ((!additionalHeaders.isEmpty())?"&":"") + additionalHeaders;
     }
 }
 

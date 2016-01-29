@@ -1,5 +1,7 @@
 # Simple Java app using streamdata.io
 
+This is a sample implementation of an EventSource (https://www.w3.org/TR/eventsource/) in Java to use streamdata.io service from the JVM. It relies on Jersey (https://jersey.java.net) as a Java EventSource implementation (https://jersey.java.net/documentation/latest/sse.html) It uses zjsonpatch (https://github.com/flipkart-incubator/zjsonpatch) as a Java Json-Patch implementation. zjsonpatch relies itself on jackson Java Json library (http://wiki.fasterxml.com/JacksonHome).
+
 ## Step by step setup
 
 1. Create an free account on streamdata.io https://portal.streamdata.io/#/register to get an App token.

@@ -34,7 +34,7 @@ public class Main {
 
 
         // the sample API
-        String apiUrl = "http://stockmarket.streamdata.io/prices";
+        String apiUrl = "http://stockmarket.streamdata.io/v2/prices";
 
         String token = "[YOUR TOKEN HERE]";
 

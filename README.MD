@@ -1,4 +1,4 @@
-# Simple Java app using streamdata.io
+# Simple Java app using Axway AMPLIFY Streams
 
 This is a sample implementation of an EventSource (https://www.w3.org/TR/eventsource/) in Java. It uses the **Axway AMPLIFY Streams** service from a JVM. It relies on Jersey (https://jersey.java.net) as a Java EventSource implementation (https://jersey.java.net/documentation/latest/sse.html). It uses *zjsonpatch* (https://github.com/flipkart-incubator/zjsonpatch) as a Java Json-Patch implementation. *zjsonpatch* relies itself on Jackson Java Json library (http://wiki.fasterxml.com/JacksonHome).
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Streamdata.io
+ * Copyright 2019 Axway Inc.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package io.streamdata;
+package axway.streams;
 
 // jackson imports
 import com.fasterxml.jackson.databind.JsonNode;
@@ -41,7 +41,7 @@ import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
 
 /**
- * This is a sample implementation of an EventSource (https://www.w3.org/TR/eventsource/) in Java to use Streamdata.io service.
+ * This is a sample implementation of an EventSource (https://www.w3.org/TR/eventsource/) in Java to use Axway AMPLIFY Streams service.
  *
  *
  * It uses Jersey (https://jersey.java.net) as a Java EventSource implementation (https://jersey.java.net/documentation/latest/sse.html)
@@ -96,12 +96,12 @@ public class SampleEventSource extends Thread {
         try {
 
 
-            // build EventSource object to handle Streamdata.io Server-Sent events for this target
-            // Streamdata.io will send two types of events :
-            // 'data' event : this is the first event received to provide a full set of data and initialize the data stream. the streamdata.io specific 'data' event will be triggered
-            // when a fresh Json data set is pushed by Streamdata.io coming from the API.
-            // 'patch' event : this is a patch event to apply to initial data set. The streamdata.io specific 'patch' event will be triggered when a fresh Json patch
-            // is pushed by streamdata.io coming from the API. This patch has to be applied to the latest data set.
+            // build EventSource object to handle Axway AMPLIFY Streams Server-Sent events for this target
+            // Axway AMPLIFY Streams will send two types of events :
+            // 'data' event : this is the first event received to provide a full set of data and initialize the data stream. the Axway AMPLIFY Streams specific 'data' event will be triggered
+            // when a fresh Json data set is pushed by Axway AMPLIFY Streams coming from the API.
+            // 'patch' event : this is a patch event to apply to initial data set. The Axway AMPLIFY Streams specific 'patch' event will be triggered when a fresh Json patch
+            // is pushed by Axway AMPLIFY Streams coming from the API. This patch has to be applied to the latest data set.
             LOGGER.debug("Starting EventSource ...");
             eventSource = new EventSource(target) {
                 @Override
@@ -144,7 +144,7 @@ public class SampleEventSource extends Thread {
                         this.close();
                     } else {
                         // add code here for any other event type
-                        // streamdata.io
+                        // Axway AMPLIFY Streams
                         LOGGER.debug("Unhandled event received: {}\n\n", eventData);
                     }
                 }

@@ -16,3 +16,9 @@ hs_err_pid*
 target/
 
 *.iml
+
+# Visual Studio Code
+.vscode/
+.settings/
+.classpath
+.project

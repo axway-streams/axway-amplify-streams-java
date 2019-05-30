@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Streamdata.io
+ * Copyright 2016 Axway Inc.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package io.streamdata;
+package axway.streams;
 
 import com.google.common.base.Preconditions;
 import jersey.repackaged.com.google.common.collect.Maps;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     /**
-     * simple main class to run a thread connecting to a sample API using Streamdata.io service.
+     * simple main class to run a thread connecting to a sample API using Axway AMPLIFY Streams service.
      *
      * @param args
      */
@@ -36,7 +36,7 @@ public class Main {
         // the sample API
         String apiUrl = "http://stockmarket.streamdata.io/v2/prices";
 
-        String token = "[YOUR TOKEN HERE]";
+        String token = "ZjhjMTQwZGYtYmVjZi00OGVjLWE2MzctYjgyMGE5NDFiMTBk";
 
         // specific header map associated with the request
         Map<String,String> headers = Maps.newHashMap();
@@ -46,7 +46,7 @@ public class Main {
 
         // headers.put("Accept", "application/json");
 
-        String url = buildStreamdataUrl(apiUrl, token, headers);
+        String url = buildAxwayStreamsUrl(apiUrl, token, headers);
 
 
         // Start the event source as a Thread.
@@ -66,7 +66,7 @@ public class Main {
     }
 
 
-    private static String buildStreamdataUrl(String anApiUrl,String aToken,Map<String,String> aHeaders) throws URISyntaxException {
+    private static String buildAxwayStreamsUrl(String anApiUrl,String aToken,Map<String,String> aHeaders) throws URISyntaxException {
         Preconditions.checkNotNull(anApiUrl,"anApiUrl cannot be null");
         Preconditions.checkNotNull(aToken,"aToken cannot be null");
         Preconditions.checkNotNull(aHeaders,"aHeaders cannot be null");

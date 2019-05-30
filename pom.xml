@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.streamdata</groupId>
-    <artifactId>streamdataio-java</artifactId>
+    <groupId>axway.streams</groupId>
+    <artifactId>axway-streams-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>streamdataio-java</name>
+    <name>axway-streams-java</name>
 
     <licenses>
         <license>
@@ -41,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.streamdata.Main</mainClass>
+                            <mainClass>axway.streams.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -87,7 +87,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>io.streamdata.Main</mainClass>
+                            <mainClass>axway.streams.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

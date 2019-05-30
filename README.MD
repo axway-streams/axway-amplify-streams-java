@@ -21,7 +21,7 @@ This is a sample implementation of an EventSource (https://www.w3.org/TR/eventso
 6. Run sample from a terminal:
 
   ```bash
-  java -jar target/streamdataio-java-0.0.1-SNAPSHOT.jar
+  java -jar target/axway-streams-java-0.0.1-SNAPSHOT.jar
   ```  
 
 You should see data and patches pushed in your application and displayed on your terminal.

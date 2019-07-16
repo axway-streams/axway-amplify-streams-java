@@ -36,7 +36,7 @@ public class Main {
         // the sample API
         String apiUrl = "http://stockmarket.streamdata.io/v2/prices";
 
-        String token = "ZjhjMTQwZGYtYmVjZi00OGVjLWE2MzctYjgyMGE5NDFiMTBk";
+        String token = "```[YOUR TOKEN HERE]```";
 
         // specific header map associated with the request
         Map<String,String> headers = Maps.newHashMap();
